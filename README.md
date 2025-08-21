@@ -1,6 +1,6 @@
 # rengwutils
 
-rengwu's ts utilities
+rengwu's ts/react utilities
 
 ## Tag + Push to Publish
 
