@@ -1,14 +1,5 @@
 # rengwutils
 
-rengwu's ts/react utilities
+my own collection of commonly-used ts/react utilities.
 
-## Tag + Push to Publish
-
-When you’re ready to release:
-
-```
-npm version patch   # or minor / major
-git push --follow-tags
-```
-
-That pushes a tag like `v0.1.1` → triggers the workflow → runs build → `npm publish`.
+no docs yet. coming soon though.
