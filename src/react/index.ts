@@ -1,3 +1,1 @@
-import { useVariants } from "./useVariants";
-
-export { useVariants };
+export * from "./useVariants";
