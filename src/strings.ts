@@ -14,3 +14,10 @@
 export function capitalize(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
+
+/** Class name joiner
+ *  This is a TODO
+ */
+export const cls = (...classes: (string | undefined)[]) => {
+  return classes.filter((o) => o !== undefined).join(" ");
+};
