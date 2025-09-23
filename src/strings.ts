@@ -16,8 +16,14 @@ export function capitalize(string: string) {
 }
 
 /** Class name joiner
- *  This is a TODO
+ *  filters away failed boolean checks
  */
-export const cls = (...classes: (string | undefined)[]) => {
-  return classes.filter((o) => o !== undefined).join(" ");
+export const cls = (...classes: (string | undefined | false)[]) => {
+  return classes
+    .filter((o) => {
+      if (o === undefined) return false;
+      if (o === false) return false;
+      return true;
+    })
+    .join(" ");
 };
