@@ -1,5 +1,7 @@
 import { update } from "lodash";
 
+type DropdownType = { label: string; value: any };
+
 // original types:
 // const hydrateDropdowns = <T,>(
 //   schema:
@@ -9,10 +11,6 @@ import { update } from "lodash";
 //     | BOSchemaLoose<T>,
 //   dropdownMap: BOSchemaDropdownMap<T>
 // )
-
-type DropdownType = { label: string; value: any };
-
-// used in hydrate dropdowns
 export const hydrateDropdownsAux = (schema: any, dropdownMap: any) => {
   const result = { ...schema };
   const traverse = (
