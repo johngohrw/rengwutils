@@ -1,5 +1,5 @@
 import { CSSProperties } from "react";
-import { combine } from "../object";
+import { combine } from "../../object";
 
 export const useVariants = <T extends ComponentVariants>(
   selectedVariants: (keyof T)[],

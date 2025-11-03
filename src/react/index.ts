@@ -1,3 +1,5 @@
 export * from "./types/htmlElements";
 
-export * from "./useVariants";
+export * from "./hooks/useVariants";
+
+export * from "./mc/index";
