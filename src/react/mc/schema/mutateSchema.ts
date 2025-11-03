@@ -1,3 +1,10 @@
+// original typedefs:
+// const mutateSchema = <T,>(
+//   originalSchema: BOSchema<T> | BOSchemaPartial<T> | BOSchemaPartial<T, true>,
+//   mutatorSchema: BOSchemaPartial<T, true>,
+//   overwrite = false
+// ) => {
+
 /**
  * Mutates an existing schema.
  * The mutator object is Partial, which means you can selectively pick which columns to mutate.
