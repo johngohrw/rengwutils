@@ -28,9 +28,9 @@ type GetFinePrintExtraRenderer = (finePrintText: ReactNode) => ReactNode;
 // valueType: 'dependency' not supported. Please use BODependencyColumn instead.
 export const Column = <T, CustomValueType extends string>(
   columnProps: ColumnProps<T, CustomValueType>,
-  renderMap: RenderMap,
-  formRenderMap: FormRenderMap,
-  ruleMap: RuleMap,
+  renderMap: RenderMap<CustomValueType>,
+  formRenderMap: FormRenderMap<CustomValueType>,
+  ruleMap: RuleMap<CustomValueType>,
   getFinePrintRenderer: GetFinePrintRenderer,
   getFinePrintExtraRenderer: GetFinePrintExtraRenderer,
   renderLabelWithFakeAsterisk: (label: string) => ReactNode
