@@ -49,6 +49,8 @@
     "vitest": "^3.2.4"
   },
   "dependencies": {
+    "@ant-design/pro-components": "^2.8.10",
+    "antd": "^5.28.0",
     "lodash": "^4.17.21",
     "react": "^19.1.1"
   }
