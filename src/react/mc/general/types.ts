@@ -1,7 +1,3 @@
-import { InputProps } from "antd";
-import { Schema } from "../schema/schemaTypes";
-import { ProFieldValueType } from "@ant-design/pro-components";
-
 export type DropdownType = {
   value: any;
   label: string | number;
