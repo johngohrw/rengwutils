@@ -16,12 +16,16 @@ export type FormItemRenderFn = (
   ...renderFormItemProps: RenderFormItemProps
 ) => any;
 
-export type RenderMap = Partial<Record<ProFieldValueType | string, RenderFn>>;
-export type FormRenderMap = Partial<
-  Record<ProFieldValueType | string, FormItemRenderFn>
+export type RenderMap<CustomValueType extends string> = Partial<
+  Record<ProFieldValueType | CustomValueType, RenderFn>
+>;
+export type FormRenderMap<CustomValueType extends string> = Partial<
+  Record<ProFieldValueType | CustomValueType, FormItemRenderFn>
 >;
 
-export type RuleMap = Partial<Record<ProFieldValueType | string, Rule[]>>;
+export type RuleMap<CustomValueType extends string> = Partial<
+  Record<ProFieldValueType | CustomValueType, Rule[]>
+>;
 
 /** [dom, entity, index, action, schema] */
 export type RenderProps<T = any, ValueType = "text"> = Parameters<
