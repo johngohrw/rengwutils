@@ -26,6 +26,7 @@ type GetFinePrintRenderer = (
 type GetFinePrintExtraRenderer = (finePrintText: ReactNode) => ReactNode;
 
 // valueType: 'dependency' not supported. Please use BODependencyColumn instead.
+// should be used as a HOC
 export const Column = <T, CustomValueType extends string>(
   columnProps: ColumnProps<T, CustomValueType>,
   renderMap: RenderMap<CustomValueType>,

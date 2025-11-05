@@ -19,6 +19,7 @@ import {
   DeepKeyPathTreeUnbounded,
   DeepKeyPathUnbounded,
 } from "./general/types";
+import { columnFactory } from "./schema/columnFactory";
 import { hydrateDropdowns } from "./schema/hydrateDropdowns";
 import { mutateSchema } from "./schema/mutateSchema";
 import {
@@ -43,6 +44,7 @@ export {
   FormRenderMap,
   hydrateDropdowns,
   mutateSchema,
+  columnFactory,
   RenderFn,
   RenderFormItemDefaultProps,
   RenderFormItemProps,
