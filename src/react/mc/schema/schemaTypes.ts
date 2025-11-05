@@ -2,8 +2,8 @@ import { ColumnProps } from "../column/columnTypes";
 import { DropdownType } from "../general/types";
 
 /**
- * Inherit BOColumn's props, but everything is optional
- * BOColumnFactory relies on the existence of `_title` to decide whether a given node is a column. Will be mapped to `title` in the end
+ * Inherit ColumnProps, but everything is optional
+ * ColumnFactory will rely on the existence of `_title` to decide whether a given node is a column. Will be mapped to `title` in the end
  */
 export type SchemaColumnProps<
   T,
@@ -79,7 +79,7 @@ export type SchemaPartial<T, CustomValueTypes, NoTitle = false> = {
 type DeepSchemaNodePartial<U, NoTitle> = SchemaPartial<U, NoTitle>;
 
 // A more lenient version of Schema which is Partial and accepts keys outside of T.
-export type BOSchemaLoose<T, CustomValueTypes, NoTitle = true> = SchemaPartial<
+export type SchemaLoose<T, CustomValueTypes, NoTitle = true> = SchemaPartial<
   T & Record<any, any>,
   CustomValueTypes,
   NoTitle

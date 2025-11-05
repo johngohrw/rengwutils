@@ -43,7 +43,7 @@ type Prev = [never, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 // export type AllValueTypes = ProFieldValueType | CustomFieldValueType;
 
-// type BOSchema<T> = Schema<T, AllValueTypes>;
+// type MySchema<T> = Schema<T, AllValueTypes>;
 
 // type Person = {
 //   name: string;
@@ -51,7 +51,7 @@ type Prev = [never, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 //   address: string;
 // };
 
-// const schema: BOSchema<Person> = {
+// const schema: MySchema<Person> = {
 //   address: {
 //     _title: "Address",
 //     valueType: "monospaced",

@@ -21,6 +21,14 @@ import {
 } from "./general/types";
 import { hydrateDropdowns } from "./schema/hydrateDropdowns";
 import { mutateSchema } from "./schema/mutateSchema";
+import {
+  Schema,
+  SchemaColumnProps,
+  SchemaDropdownMap,
+  SchemaField,
+  SchemaLoose,
+  SchemaPartial,
+} from "./schema/schemaTypes";
 
 export {
   AllRenderFormItemProps,
@@ -42,4 +50,10 @@ export {
   RenderTextProps,
   RuleMap,
   ShowInValues,
+  Schema,
+  SchemaColumnProps,
+  SchemaDropdownMap,
+  SchemaField,
+  SchemaLoose,
+  SchemaPartial,
 };
