@@ -1,5 +1,4 @@
 import { ProColumns, ProFormList } from "@ant-design/pro-components";
-import { Column } from "../column/column";
 import { ColumnProps } from "../column/columnTypes";
 import {
   Schema,
@@ -18,7 +17,6 @@ type FormListItemRenderer = ComponentProps<typeof ProFormList>["itemRender"];
  * Each node is recursively mapped and then completely flattened.
  * @param coreProps - required props
  * @param columnSchema - a `Schema` schema object.
- * @param initialTrail - haha
  * @returns ProColumns[]
  */
 export const columnFactory = <T, CustomValueTypes>(

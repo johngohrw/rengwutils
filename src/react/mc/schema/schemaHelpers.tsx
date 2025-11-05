@@ -6,7 +6,7 @@ import {
 
 /**
  * Wrap ProColumns[] with this to use as BOProDescription's columns
- * to avoid littering our codebase with as ProDescriptionsItemProps[]
+ * to avoid littering your codebase with as ProDescriptionsItemProps[]
  * @param columns
  */
 export const toDescriptions = <T,>(columns: ProColumns<T>[]) =>
@@ -20,7 +20,7 @@ export const toDescriptionsLoose = <T,>(columns: ProColumns<T>[]) =>
 
 /**
  * Wrap ProColumns[] with this to use as BOSchemaForm's columns
- * to avoid littering our codebase with as ProFormColumnsType[]
+ * to avoid littering your codebase with as ProFormColumnsType[]
  * @param columns
  */
 export const toSchemaForm = <T,>(columns: ProColumns<T>[]) =>

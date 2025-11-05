@@ -1,17 +1,21 @@
 import { update } from "lodash";
+import {
+  Schema,
+  SchemaDropdownMap,
+  SchemaLoose,
+  SchemaPartial,
+} from "./schemaTypes";
 
 type DropdownType = { label: string; value: any };
 
-// original types:
-// const hydrateDropdowns = <T,>(
-//   schema:
-//     | BOSchema<T>
-//     | BOSchemaPartial<T>
-//     | BOSchemaPartial<any, true>
-//     | BOSchemaLoose<T>,
-//   dropdownMap: BOSchemaDropdownMap<T>
-// )
-export const hydrateDropdowns = (schema: any, dropdownMap: any) => {
+export const hydrateDropdowns = <T, CustomValueTypes>(
+  schema:
+    | Schema<T, CustomValueTypes>
+    | SchemaPartial<T, CustomValueTypes>
+    | SchemaPartial<any, CustomValueTypes, true>
+    | SchemaLoose<T, CustomValueTypes>,
+  dropdownMap: SchemaDropdownMap<T, CustomValueTypes>
+) => {
   const result = { ...schema };
   const traverse = (
     trail: (string | number)[],
