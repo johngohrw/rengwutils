@@ -18,7 +18,7 @@ export type SchemaColumnProps<
 /**
  * SchemaColumnProps, with _columns added to cater for array types (formlists)
  */
-type SchemaColumnArrayProps<
+export type SchemaColumnArrayProps<
   T,
   CustomValueTypes,
   NoTitle = false,

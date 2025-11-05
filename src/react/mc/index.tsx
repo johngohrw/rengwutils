@@ -28,6 +28,7 @@ import {
   SchemaField,
   SchemaLoose,
   SchemaPartial,
+  SchemaColumnArrayProps,
 } from "./schema/schemaTypes";
 
 export {
@@ -51,6 +52,7 @@ export {
   RuleMap,
   ShowInValues,
   Schema,
+  SchemaColumnArrayProps,
   SchemaColumnProps,
   SchemaDropdownMap,
   SchemaField,
