@@ -19,8 +19,8 @@ import {
   DeepKeyPathTreeUnbounded,
   DeepKeyPathUnbounded,
 } from "./general/types";
-import { hydrateDropdownsAux } from "./schema/hydrateDropdowns";
-import { mutateSchemaAux } from "./schema/mutateSchema";
+import { hydrateDropdowns } from "./schema/hydrateDropdowns";
+import { mutateSchema } from "./schema/mutateSchema";
 
 export {
   AllRenderFormItemProps,
@@ -32,8 +32,8 @@ export {
   DeepKeyPathUnbounded,
   FormItemRenderFn,
   FormRenderMap,
-  hydrateDropdownsAux,
-  mutateSchemaAux,
+  hydrateDropdowns,
+  mutateSchema,
   RenderFn,
   RenderFormItemDefaultProps,
   RenderFormItemProps,

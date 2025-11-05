@@ -15,7 +15,7 @@
  * @param mutatorSchema - mixin schema.
  * @param overwrite - whether to inherit existing properties in a column or not.
  */
-export const mutateSchemaAux = <T>(
+export const mutateSchema = <T>(
   originalSchema: any,
   mutatorSchema: any,
   overwrite = false

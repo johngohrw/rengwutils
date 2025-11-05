@@ -11,7 +11,7 @@ type DropdownType = { label: string; value: any };
 //     | BOSchemaLoose<T>,
 //   dropdownMap: BOSchemaDropdownMap<T>
 // )
-export const hydrateDropdownsAux = (schema: any, dropdownMap: any) => {
+export const hydrateDropdowns = (schema: any, dropdownMap: any) => {
   const result = { ...schema };
   const traverse = (
     trail: (string | number)[],
