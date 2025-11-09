@@ -4,3 +4,4 @@ export * from "./browser";
 export * from "./math";
 export * from "./object";
 export * from "./strings";
+export * from "./classes";
