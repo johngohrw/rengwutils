@@ -35,12 +35,16 @@ export const StoryboardRenderer = ({
 }) => {
   return (
     <Storyboard>
-      {frames.map((frame) => (
-        <Frame {...{ debug }} height={frame.height}>
-          {frame.items.map((item) => {
+      {frames.map((frame, i) => (
+        <Frame
+          key={`${i}-${frame.items.length}`}
+          {...{ debug }}
+          height={frame.height}
+        >
+          {frame.items.map((item, j) => {
             const { element, ...restProps } = item;
             return (
-              <Positioned {...{ debug }} {...restProps}>
+              <Positioned key={`${i}-${j}`} {...{ debug }} {...restProps}>
                 {element}
               </Positioned>
             );
