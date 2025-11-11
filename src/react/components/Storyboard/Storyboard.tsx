@@ -11,7 +11,7 @@ import { combine } from "../../../object";
 import { isNullish } from "../../../bools";
 import { useDampedValue } from "../../hooks/useDampedValue";
 
-type StoryboardFrame = {
+export type StoryboardFrame = {
   height: CSSProperties["height"];
   items: {
     align?: Align;
