@@ -9,7 +9,7 @@ import {
 import { DivEl } from "../../types/htmlElements";
 import { combine } from "../../../object";
 import { isNullish } from "../../../bools";
-import { useDampedValue } from "../../hooks/useDampedValue";
+import { useDampenedValue, useDampenedValueSimple } from "../../hooks";
 
 export type StoryboardFrame = {
   height: CSSProperties["height"];
@@ -248,8 +248,16 @@ const PositionedInnerEased = ({
 }) => {
   const getRefRect = () => targetEl.getBoundingClientRect();
   const [coords, setCoords] = useState<PositionedCoords>(getRefRect());
-  const dampedX = useDampedValue(coords.x, easingLag, 0.5, fps);
-  const dampedY = useDampedValue(coords.y, easingLag, 0.5, fps);
+  const dampedX = useDampenedValueSimple(coords.x, {
+    tau: easingLag,
+    eps: 0.5,
+    fps,
+  });
+  const dampedY = useDampenedValueSimple(coords.y, {
+    tau: easingLag,
+    eps: 0.5,
+    fps,
+  });
 
   useEffect(() => {
     const updatePos = () => {
