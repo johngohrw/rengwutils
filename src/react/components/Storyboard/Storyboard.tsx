@@ -9,7 +9,7 @@ import {
 import { DivEl } from "../../types/htmlElements";
 import { combine } from "../../../object";
 import { isNullish } from "../../../bools";
-import { useDampenedValue, useDampenedValueSimple } from "../../hooks";
+import { useDampenedValue } from "../../hooks";
 
 export type StoryboardFrame = {
   height: CSSProperties["height"];
@@ -248,20 +248,24 @@ const PositionedInnerEased = ({
 }) => {
   const getRefRect = () => targetEl.getBoundingClientRect();
   const [coords, setCoords] = useState<PositionedCoords>(getRefRect());
-  const dampedX = useDampenedValueSimple(coords.x, {
+  const setTargetX = useDampenedValue((x) => setCoords((p) => ({ ...p, x })), {
     tau: easingLag,
     eps: 0.5,
     fps,
+    initialValue: coords.x,
   });
-  const dampedY = useDampenedValueSimple(coords.y, {
+  const setTargetY = useDampenedValue((y) => setCoords((p) => ({ ...p, y })), {
     tau: easingLag,
     eps: 0.5,
     fps,
+    initialValue: coords.y,
   });
 
   useEffect(() => {
     const updatePos = () => {
-      setCoords(getRefRect());
+      const rect = getRefRect();
+      setTargetX(rect.x);
+      setTargetY(rect.y);
     };
 
     window.addEventListener("scroll", updatePos);
@@ -276,7 +280,7 @@ const PositionedInnerEased = ({
     <div
       style={{
         position: "fixed",
-        transform: `translate(${dampedX}px,${dampedY}px)`,
+        transform: `translate(${coords.x}px,${coords.y}px)`,
         top: 0,
         bottom: 0,
         willChange: "transform",
