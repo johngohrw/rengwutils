@@ -21,18 +21,29 @@ export type StoryboardFrame = {
   }[];
 };
 
+type StoryboardDebugOptions = {
+  items?: boolean;
+  frames?: boolean;
+};
+
 export const StoryboardRenderer = ({
   frames,
+  debug,
 }: {
   frames: StoryboardFrame[];
+  debug?: StoryboardDebugOptions;
 }) => {
   return (
     <Storyboard>
       {frames.map((frame) => (
-        <Frame height={frame.height}>
+        <Frame {...{ debug }} height={frame.height}>
           {frame.items.map((item) => {
             const { element, ...restProps } = item;
-            return <Positioned {...restProps}>{element}</Positioned>;
+            return (
+              <Positioned {...{ debug }} {...restProps}>
+                {element}
+              </Positioned>
+            );
           })}
         </Frame>
       ))}
@@ -59,17 +70,18 @@ export const Frame = ({
   children,
   height = "auto",
   width = "100%",
+  debug,
 }: DivEl & {
   height?: CSSProperties["height"];
   width?: CSSProperties["width"];
+  debug?: StoryboardDebugOptions;
 }) => {
   return (
     <div
-      style={{
-        position: "relative",
-        height,
-        width,
-      }}
+      style={combine(
+        { position: "relative", height, width },
+        debug?.frames && { border: "1px solid black" }
+      )}
     >
       {children}
     </div>
@@ -133,10 +145,12 @@ export const Positioned = ({
   align,
   anchor,
   easingLag,
+  debug,
 }: DivEl & {
   align?: Align;
   anchor?: Anchor;
   easingLag?: number;
+  debug?: StoryboardDebugOptions;
 }) => {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -147,14 +161,16 @@ export const Positioned = ({
     <>
       <div
         ref={ref}
-        style={{
-          position: "absolute",
-          width: "3px",
-          height: "3px",
-          background: "red",
-          borderRadius: "50%",
-          ...getAlignCss(align),
-        }}
+        style={combine(
+          { position: "absolute" },
+          debug?.items && {
+            width: "3px",
+            height: "3px",
+            background: "red",
+            borderRadius: "50%",
+          },
+          getAlignCss(align)
+        )}
       ></div>
       {ref.current &&
         (easingLag ? (
