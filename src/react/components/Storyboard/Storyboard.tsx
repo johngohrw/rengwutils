@@ -13,6 +13,7 @@ import { useDampenedValue } from "../../hooks";
 
 export type StoryboardFrame = {
   height: CSSProperties["height"];
+  width: CSSProperties["width"];
   items: {
     align?: Align;
     anchor?: Anchor;
@@ -40,6 +41,7 @@ export const StoryboardRenderer = ({
           key={`${i}-${frame.items.length}`}
           {...{ debug }}
           height={frame.height}
+          width={frame.width}
         >
           {frame.items.map((item, j) => {
             const { element, ...restProps } = item;
