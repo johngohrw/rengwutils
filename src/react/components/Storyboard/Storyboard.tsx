@@ -10,10 +10,9 @@ import { DivEl } from "../../types/htmlElements";
 import { combine } from "../../../object";
 import { isNullish } from "../../../bools";
 import { useDampenedValue } from "../../hooks";
-
 export type StoryboardFrame = {
-  height: CSSProperties["height"];
-  width: CSSProperties["width"];
+  height?: CSSProperties["height"];
+  width?: CSSProperties["width"];
   items: {
     align?: Align;
     anchor?: Anchor;
@@ -229,8 +228,10 @@ const PositionedInner = ({
         willChange: "transform",
       }}
     >
-      <div style={{ position: "absolute", ...getAnchorCss(anchor) }}>
-        {children}
+      <div style={{ position: "relative" }}>
+        <div style={{ position: "absolute", ...getAnchorCss(anchor) }}>
+          {children}
+        </div>
       </div>
     </div>
   );
@@ -288,8 +289,10 @@ const PositionedInnerEased = ({
         willChange: "transform",
       }}
     >
-      <div style={{ position: "absolute", ...getAnchorCss(anchor) }}>
-        {children}
+      <div style={{ position: "relative" }}>
+        <div style={{ position: "absolute", ...getAnchorCss(anchor) }}>
+          {children}
+        </div>
       </div>
     </div>
   );
