@@ -10,15 +10,18 @@ import { DivEl } from "../../types/htmlElements";
 import { combine } from "../../../object";
 import { isNullish } from "../../../bools";
 import { useDampenedValue } from "../../hooks";
+
 export type StoryboardFrame = {
   height?: CSSProperties["height"];
   width?: CSSProperties["width"];
-  items: {
-    align?: Align;
-    anchor?: Anchor;
-    easingLag?: number;
-    element?: ReactNode;
-  }[];
+  items: StoryboardItemProps[];
+};
+
+type StoryboardItemProps = {
+  align?: Align;
+  anchor?: Anchor;
+  easingLag?: number;
+  element?: ReactNode;
 };
 
 type StoryboardDebugOptions = {
@@ -125,21 +128,20 @@ type Anchor = {
 };
 
 const getAnchorCss = (anchor?: Anchor) => {
-  const hasLeftRight = !isNullish(anchor?.left || anchor?.right);
-  const hasTopBottom = !isNullish(anchor?.top || anchor?.bottom);
+  const hasLeftRight = !isNullish(anchor?.left) || !isNullish(anchor?.right);
+  const hasTopBottom = !isNullish(anchor?.top) || !isNullish(anchor?.bottom);
   const result = combine<CSSProperties>(
     anchor?.center && {
-      top: hasTopBottom ? undefined : "0",
-      left: hasLeftRight ? undefined : "0",
-      transform: `
-          translateX(${hasLeftRight ? "0" : `-50%`}) 
-          translateY(${hasTopBottom ? "0" : `-50%`})
-        `,
+      top: hasTopBottom ? undefined : 0,
+      left: hasLeftRight ? undefined : 0,
+      transform: `translateX(${hasLeftRight ? "0" : `-50%`}) translateY(${
+        hasTopBottom ? "0" : `-50%`
+      })`,
     },
-    !isNullish(anchor?.bottom) && { bottom: anchor.bottom, top: undefined },
-    !isNullish(anchor?.top) && { top: anchor.top },
-    !isNullish(anchor?.right) && { right: anchor.right, left: undefined },
-    !isNullish(anchor?.left) && { left: anchor.left }
+    !isNullish(anchor?.top) && { top: anchor?.top },
+    !isNullish(anchor?.bottom) && { bottom: anchor?.bottom },
+    !isNullish(anchor?.left) && { left: anchor?.left },
+    !isNullish(anchor?.right) && { right: anchor?.right }
   );
 
   return result;
