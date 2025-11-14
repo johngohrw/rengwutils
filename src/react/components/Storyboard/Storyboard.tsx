@@ -10,6 +10,7 @@ import { DivEl } from "../../types/htmlElements";
 import { combine } from "../../../object";
 import { isNullish } from "../../../bools";
 import { useDampenedValue } from "../../hooks";
+import { cls } from "../../../strings";
 
 export type StoryboardFrame = {
   height?: CSSProperties["height"];
@@ -149,6 +150,7 @@ const getAnchorCss = (anchor?: Anchor) => {
 
 export const Positioned = ({
   children,
+  className,
   align,
   anchor,
   easingLag,
@@ -168,6 +170,7 @@ export const Positioned = ({
     <>
       <div
         ref={ref}
+        className={cls(`align`, className)}
         style={combine(
           { position: "absolute" },
           debug?.items && {
@@ -201,6 +204,7 @@ type PositionedCoords = { x: number; y: number };
 const PositionedInner = ({
   targetEl,
   anchor,
+  className,
   children,
 }: DivEl & {
   targetEl: HTMLElement;
@@ -231,7 +235,10 @@ const PositionedInner = ({
       }}
     >
       <div style={{ position: "relative" }}>
-        <div style={{ position: "absolute", ...getAnchorCss(anchor) }}>
+        <div
+          className={cls(`anchor`, className)}
+          style={{ position: "absolute", ...getAnchorCss(anchor) }}
+        >
           {children}
         </div>
       </div>
