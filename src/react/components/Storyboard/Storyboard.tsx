@@ -21,6 +21,7 @@ export type StoryboardFrame = {
 type StoryboardItemProps = {
   align?: Align;
   anchor?: Anchor;
+  constrain?: Constrain;
   easingLag?: number;
   element?: ReactNode;
 };
@@ -131,6 +132,7 @@ type Anchor = {
 const getAnchorCss = (anchor?: Anchor) => {
   const hasLeftRight = !isNullish(anchor?.left) || !isNullish(anchor?.right);
   const hasTopBottom = !isNullish(anchor?.top) || !isNullish(anchor?.bottom);
+
   const result = combine<CSSProperties>(
     anchor?.center && {
       top: hasTopBottom ? undefined : 0,
@@ -139,6 +141,7 @@ const getAnchorCss = (anchor?: Anchor) => {
         hasTopBottom ? "0" : `-50%`
       })`,
     },
+
     !isNullish(anchor?.top) && { top: anchor?.top },
     !isNullish(anchor?.bottom) && { bottom: anchor?.bottom },
     !isNullish(anchor?.left) && { left: anchor?.left },
@@ -148,16 +151,43 @@ const getAnchorCss = (anchor?: Anchor) => {
   return result;
 };
 
+type Constrain = {
+  width?: CSSProperties["maxWidth"];
+  height?: CSSProperties["maxHeight"];
+  negativeWidth?: CSSProperties["maxWidth"];
+  negativeHeight?: CSSProperties["maxHeight"];
+};
+
+const getConstrainCss = (constrain?: Constrain) => {
+  const negWidth =
+    constrain?.negativeWidth && `calc(100vw - ${constrain?.negativeWidth})`;
+  const hasNegWidth = !isNullish(negWidth);
+
+  const negHeight =
+    constrain?.negativeHeight && `calc(100vh - ${constrain?.negativeHeight})`;
+  const hasNegHeight = !isNullish(negHeight);
+
+  const result: CSSProperties = {
+    width: hasNegWidth ? negWidth : constrain?.width,
+    maxWidth: hasNegWidth ? negWidth : constrain?.width,
+    height: hasNegHeight ? negHeight : constrain?.height,
+    maxHeight: hasNegHeight ? negHeight : constrain?.height,
+  };
+  return result;
+};
+
 export const Positioned = ({
   children,
   className,
   align,
   anchor,
+  constrain,
   easingLag,
   debug,
 }: DivEl & {
   align?: Align;
   anchor?: Anchor;
+  constrain?: Constrain;
   easingLag?: number;
   debug?: StoryboardDebugOptions;
 }) => {
@@ -187,6 +217,7 @@ export const Positioned = ({
           <PositionedInnerEased
             targetEl={ref.current}
             anchor={anchor}
+            constrain={constrain}
             easingLag={easingLag}
           >
             {children}
@@ -205,10 +236,12 @@ const PositionedInner = ({
   targetEl,
   anchor,
   className,
+  constrain,
   children,
 }: DivEl & {
   targetEl: HTMLElement;
   anchor?: Anchor;
+  constrain?: Constrain;
 }) => {
   const getRefRect = () => targetEl.getBoundingClientRect();
   const [coords, setCoords] = useState<PositionedCoords>(getRefRect());
@@ -237,7 +270,11 @@ const PositionedInner = ({
       <div style={{ position: "relative" }}>
         <div
           className={cls(`anchor`, className)}
-          style={{ position: "absolute", ...getAnchorCss(anchor) }}
+          style={{
+            position: "absolute",
+            ...getAnchorCss(anchor),
+            ...getConstrainCss(constrain),
+          }}
         >
           {children}
         </div>
@@ -249,12 +286,15 @@ const PositionedInner = ({
 const PositionedInnerEased = ({
   targetEl,
   anchor,
+  constrain,
+  className,
   children,
   easingLag = 0.1,
   fps = 120,
 }: DivEl & {
   targetEl: HTMLElement;
   anchor?: Anchor;
+  constrain?: Constrain;
   easingLag?: number;
   fps?: number;
 }) => {
@@ -288,8 +328,10 @@ const PositionedInnerEased = ({
       window.removeEventListener("resize", updatePos);
     };
   }, []);
+
   return (
     <div
+      className={cls(`anchor`, className)}
       style={{
         position: "fixed",
         transform: `translate(${coords.x}px,${coords.y}px)`,
@@ -299,7 +341,13 @@ const PositionedInnerEased = ({
       }}
     >
       <div style={{ position: "relative" }}>
-        <div style={{ position: "absolute", ...getAnchorCss(anchor) }}>
+        <div
+          style={{
+            position: "absolute",
+            ...getAnchorCss(anchor),
+            ...getConstrainCss(constrain),
+          }}
+        >
           {children}
         </div>
       </div>
