@@ -1,6 +1,6 @@
 {
   "name": "rengwutils",
-  "version": "1.0.36",
+  "version": "1.0.37",
   "description": "rengwu's utility functions",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
