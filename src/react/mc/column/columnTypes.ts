@@ -64,7 +64,12 @@ export type AllRenderFormItemProps = {
   renderFormItemProps: RenderFormItemProps;
 } & Partial<RenderFormItemDefaultProps>;
 
-export type ColumnProps<T, AllValueTypes, ValueType = "text"> = {
+export type ColumnProps<
+  T,
+  AllValueTypes,
+  ValueType = "text",
+  ExtraHelperProps = {},
+> = {
   helperProps?: {
     /** Applied to `fieldProps.options` */
     dropdownOptions?: DropdownType[];
@@ -82,7 +87,7 @@ export type ColumnProps<T, AllValueTypes, ValueType = "text"> = {
     fakeRequired?: boolean;
     /** overrides value of 'title' to '' in resulting column */
     noTitle?: boolean;
-  };
+  } & ExtraHelperProps;
   /** '_title' will be used in place of 'title' if the latter is not defined */
   _title?: string | ReactNode | ColumnTitle<any>;
   /** Rules array which will be applied to formItemProps.rules */
