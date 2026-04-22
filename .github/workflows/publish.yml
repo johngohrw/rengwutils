@@ -3,11 +3,13 @@ name: Publish Package
 on:
   push:
     tags:
-      - "v*" # only run when you push tags like v1.0.0
+      - "v*"
 
 jobs:
   publish:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write # required for OIDC
     steps:
       - uses: actions/checkout@v4
 
@@ -24,6 +26,4 @@ jobs:
         run: npm run build
 
       - name: Publish
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --provenance --access public
